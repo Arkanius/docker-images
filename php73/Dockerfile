@@ -22,12 +22,15 @@ RUN adduser -D -u 1000 app && \
     openldap-dev \
     make \
     unzip \
+    openssh \
     wget && \
     docker-php-ext-install zip bz2 mbstring pcntl xsl mysqli pdo pdo_mysql pdo_pgsql && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install gd && \
     docker-php-ext-configure ldap --with-libdir=lib/ && \
     docker-php-ext-install ldap && \
+    pecl install -f xdebug && \
+    docker-php-ext-enable xdebug && \
     apk del build-base && \
     rm -rf /var/cache/apk/*
 
