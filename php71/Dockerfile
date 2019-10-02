@@ -2,8 +2,11 @@ FROM php:7.1-fpm-alpine
 
 COPY php.ini $PHP_INI_DIR/php.ini
 
-RUN adduser -D -u 1000 app && \
-    apk --update add \
+RUN apk --update add sudo && \ 
+    adduser -D -u 1000 app && \
+    echo "app ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
+    chmod 0440 /etc/sudoers.d/user && \
+    apk add \
     postgresql-dev \
     bzip2-dev \
     autoconf \
@@ -21,8 +24,8 @@ RUN adduser -D -u 1000 app && \
     libxslt-dev \
     openldap-dev \
     make \
-    openssh \
     unzip \
+    openssh \
     wget && \
     docker-php-ext-install zip bz2 mbstring pcntl xsl mysqli pdo pdo_mysql pdo_pgsql bcmath && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
