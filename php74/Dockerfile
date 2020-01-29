@@ -4,6 +4,11 @@ COPY php.ini $PHP_INI_DIR/php.ini
 
 RUN adduser -D -u 1000 app && \
     apk --update add \
+    libxml2-dev \
+    zlib-dev \
+    gmp-dev \
+    imap-dev \
+    icu-dev \
     postgresql-dev \
     bzip2-dev \
     autoconf \
@@ -25,7 +30,7 @@ RUN adduser -D -u 1000 app && \
     openssh \
     oniguruma-dev \
     wget && \
-    docker-php-ext-install zip bz2 mbstring pcntl xsl mysqli pdo pdo_mysql pdo_pgsql bcmath && \
+    docker-php-ext-install zip bz2 mbstring pcntl xsl mysqli pdo pdo_mysql pdo_pgsql bcmath intl sockets exif && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd && \
     docker-php-ext-configure ldap --with-libdir=lib/ && \
