@@ -2,8 +2,12 @@ FROM php:7.4-fpm-alpine
 
 COPY php.ini $PHP_INI_DIR/php.ini
 
-RUN adduser -D -u 1000 app && \
+RUN apk --update add sudo && \ 
+    adduser -D -u 1000 app && \
+    echo "app ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
+    chmod 0440 /etc/sudoers.d/user && \
     apk --update add \
+    wkhtmltopdf ttf-freefont fontconfig \
     musl-dev \
     libxml2-dev \
     zlib-dev \
