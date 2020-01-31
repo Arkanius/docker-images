@@ -1,8 +1,6 @@
 FROM php:7.3-fpm-alpine
 
 COPY php.ini $PHP_INI_DIR/php.ini
-    # rm -rf /var/www/app/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 && \
-    # ln -s /usr/bin/wkhtmltopdf /var/www/app/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64
 
 RUN apk --update add sudo && \ 
     adduser -D -u 1000 app && \

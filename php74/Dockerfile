@@ -4,6 +4,7 @@ COPY php.ini $PHP_INI_DIR/php.ini
 
 RUN adduser -D -u 1000 app && \
     apk --update add \
+    musl-dev \
     libxml2-dev \
     zlib-dev \
     gmp-dev \
