@@ -6,7 +6,7 @@ RUN apk --update add sudo && \
     adduser -D -u 1000 app && \
     echo "app ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
     chmod 0440 /etc/sudoers.d/user && \
-    apk --update add \
+    apk add \
     wkhtmltopdf ttf-freefont fontconfig \
     musl-dev \
     libxml2-dev \
