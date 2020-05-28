@@ -41,7 +41,9 @@ RUN apk --update add sudo && \
     docker-php-ext-configure ldap --with-libdir=lib/ && \
     docker-php-ext-install ldap && \
     pecl install -f xdebug && \
+    pecl install -f swoole && \
     docker-php-ext-enable xdebug && \
+    docker-php-ext-enable swoole && \
     apk del build-base && \
     rm -rf /var/cache/apk/*
 
