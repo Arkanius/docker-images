@@ -20,7 +20,7 @@ RUN apk update && apk add supervisor nginx sqlite git openssh curl && \
     ln -s /usr/local/sbin/php-fpm /usr/sbin/php-fpm7 && mkdir -p /var/log/supervisor /run/nginx
 
 COPY supervisord.conf /etc/supervisord.conf
-COPY default.conf.local /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 COPY php.ini /usr/local/etc/php/php.ini
 
 RUN apk add nodejs npm && npm install -g pm2
