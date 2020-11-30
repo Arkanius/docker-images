@@ -10,7 +10,7 @@ RUN apk update && apk add alpine-sdk autoconf bzip2-dev zlib-dev jpeg-dev libpng
     docker-php-ext-enable apcu && docker-php-ext-enable redis && docker-php-ext-enable swoole && \
     apk del alpine-sdk
 
-RUN apk update && apk add supervisor nginx sqlite git openssh curl && \
+RUN apk update && apk add supervisor nginx sqlite git openssh curl wkhtmltopdf ttf-freefont ttf-ubuntu-font-family ttf-dejavu fontconfig && \
     curl -sS https://getcomposer.org/installer -o composer-setup.php && \
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer && rm -rf composer-setup.php && \
     cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
