@@ -12,7 +12,7 @@ RUN apk update && apk add alpine-sdk autoconf bzip2-dev zlib-dev jpeg-dev libpng
 
 RUN apk update && apk add supervisor nginx sqlite git openssh curl wkhtmltopdf ttf-freefont ttf-ubuntu-font-family ttf-dejavu fontconfig && \
     curl -sS https://getcomposer.org/installer -o composer-setup.php && \
-    php composer-setup.php --install-dir=/usr/local/bin --filename=composer --1 && rm -rf composer-setup.php && \
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer --2 && rm -rf composer-setup.php && \
     cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
     sed -i 's/expose_php = On/expose_php = Off/g' /usr/local/etc/php/php.ini && \
     sed -i 's/memory_limit = 128M/memory_limit = 4G/g' /usr/local/etc/php/php.ini && \
