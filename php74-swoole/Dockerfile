@@ -3,7 +3,7 @@
 FROM php:7.4-fpm-alpine
 
 RUN apk update && apk add alpine-sdk autoconf bzip2-dev zlib-dev jpeg-dev libpng-dev gettext-dev libxml2-dev libzip-dev sqlite-dev libxslt-dev && \
-    docker-php-ext-install bz2 calendar exif gettext mysqli pcntl shmop sockets sysvmsg sysvsem sysvshm zip pdo_mysql pdo_sqlite xsl && \
+    docker-php-ext-install bz2 calendar exif gettext mysqli pcntl shmop sockets sysvmsg sysvsem sysvshm zip pdo_mysql pdo_sqlite xsl bcmath && \
     docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd && \
     printf "\n" | pecl install apcu && printf "\n" | pecl install redis && \
     printf "\n" | pecl install xdebug && printf "\n" | pecl install swoole && \
