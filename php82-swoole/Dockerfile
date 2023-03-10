@@ -30,11 +30,12 @@ RUN apk update && apk add supervisor nginx sqlite git openssh curl wkhtmltopdf t
     cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
     sed -i 's/expose_php = On/expose_php = Off/g' /usr/local/etc/php/php.ini && \
     sed -i 's/memory_limit = 128M/memory_limit = 4G/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /usr/local/etc/php/php.ini && \
-    ln -s /usr/local/sbin/php-fpm /usr/sbin/php-fpm8 && mkdir -p /var/log/supervisor /run/nginx
+    sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /usr/local/etc/php/php.ini
+
+RUN mkdir -p /var/log/supervisor /run/nginx
 
 COPY supervisord.conf /etc/supervisord.conf
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/nginx.conf
 COPY php.ini /usr/local/etc/php/php.ini
 
 RUN apk add nodejs nghttp2-dev npm && npm install -g pm2

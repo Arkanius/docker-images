@@ -2,12 +2,12 @@
 
 FROM php:7.4-fpm-alpine
 
-RUN apk update && apk add alpine-sdk autoconf bzip2-dev zlib-dev jpeg-dev libpng-dev gettext-dev libxml2-dev libzip-dev sqlite-dev libxslt-dev && \
+RUN apk update && apk add ca-certificates ffmpeg libwebp libwebp-tools alpine-sdk autoconf bzip2-dev zlib-dev jpeg-dev libpng-dev gettext-dev libxml2-dev libzip-dev sqlite-dev libxslt-dev && \
     docker-php-ext-install bz2 calendar exif gettext mysqli pcntl shmop sockets sysvmsg sysvsem sysvshm zip pdo_mysql pdo_sqlite xsl bcmath && \
     docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd && \
     printf "\n" | pecl install apcu && printf "\n" | pecl install redis && \
     printf "\n" | pecl install xdebug && printf "\n" | pecl install swoole && \
-    docker-php-ext-enable apcu && docker-php-ext-enable redis && docker-php-ext-enable swoole && \
+    docker-php-ext-enable apcu && docker-php-ext-enable redis && docker-php-ext-enable swoole && docker-php-ext-configure gd --with-webp && \
     apk del alpine-sdk less
 
 RUN apk update && apk add supervisor nginx sqlite git openssh curl wkhtmltopdf ttf-freefont ttf-ubuntu-font-family ttf-dejavu fontconfig && \
