@@ -21,7 +21,8 @@ RUN apk add --no-cache wkhtmltopdf ttf-freefont fontconfig && \
     docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd && \
     printf "\n" | pecl install apcu && printf "\n" | pecl install redis && \
     printf "\n" | pecl install swoole && \
-    docker-php-ext-enable apcu && docker-php-ext-enable redis && docker-php-ext-enable swoole && \
+    docker-php-ext-enable apcu && docker-php-ext-enable redis && docker-php-ext-enable swoole && \ 
+    docker-php-ext-configure gd --with-webp && \
     apk del alpine-sdk less
 
 RUN apk update && apk add supervisor nginx sqlite git openssh curl wkhtmltopdf ttf-freefont ttf-dejavu fontconfig && \
