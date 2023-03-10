@@ -16,13 +16,15 @@ RUN apk update && \
         echo "https://dl-cdn.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories && \
         echo "https://dl-cdn.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories 
 
-RUN apk add --no-cache wkhtmltopdf ttf-freefont fontconfig && \
+RUN apk add --no-cache wkhtmltopdf ttf-freefont fontconfig && \ 
     docker-php-ext-install bz2 calendar exif gettext mysqli pcntl shmop sockets sysvmsg sysvsem sysvshm zip pdo_mysql pdo_sqlite xsl bcmath && \
     docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd && \
     printf "\n" | pecl install apcu && printf "\n" | pecl install redis && \
     printf "\n" | pecl install swoole && \
-    docker-php-ext-enable apcu && docker-php-ext-enable redis && docker-php-ext-enable swoole && docker-php-ext-configure gd --with-webp && \
-    apk del alpine-sdk less
+    docker-php-ext-enable apcu && docker-php-ext-enable redis && docker-php-ext-enable swoole && apk del alpine-sdk less
+
+## to do image resize fix the line below
+# RUN docker-php-ext-configure gd --with-webp && apk del alpine-sdk less 
 
 RUN apk update && apk add ca-certificates ffmpeg libwebp libwebp-tools supervisor nginx sqlite git openssh curl wkhtmltopdf ttf-freefont ttf-dejavu fontconfig && \
     curl -sS https://getcomposer.org/installer -o composer-setup.php && \
@@ -30,8 +32,9 @@ RUN apk update && apk add ca-certificates ffmpeg libwebp libwebp-tools superviso
     cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
     sed -i 's/expose_php = On/expose_php = Off/g' /usr/local/etc/php/php.ini && \
     sed -i 's/memory_limit = 128M/memory_limit = 4G/g' /usr/local/etc/php/php.ini && \
-    sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /usr/local/etc/php/php.ini && \
-    ln -s /usr/local/sbin/php-fpm /usr/sbin/php-fpm8 && mkdir -p /var/log/supervisor /run/nginx
+    sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /usr/local/etc/php/php.ini
+    
+RUN mkdir -p /var/log/supervisor /run/nginx
 
 COPY supervisord.conf /etc/supervisord.conf
 COPY default.conf /etc/nginx/http.d/default.conf
