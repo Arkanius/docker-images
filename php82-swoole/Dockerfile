@@ -34,7 +34,7 @@ RUN apk update && apk add supervisor nginx sqlite git openssh curl wkhtmltopdf t
     ln -s /usr/local/sbin/php-fpm /usr/sbin/php-fpm8 && mkdir -p /var/log/supervisor /run/nginx
 
 COPY supervisord.conf /etc/supervisord.conf
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/http.d/default.conf
 COPY php.ini /usr/local/etc/php/php.ini
 
 RUN apk add nodejs nghttp2-dev npm && npm install -g pm2
