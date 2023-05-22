@@ -36,6 +36,8 @@ RUN apk update && apk add ca-certificates ffmpeg libwebp libwebp-tools superviso
     
 RUN mkdir -p /var/log/supervisor /run/nginx
 
+RUN docker-php-ext-install soap
+
 COPY supervisord.conf /etc/supervisord.conf
 COPY default.conf /etc/nginx/http.d/default.conf
 COPY php.ini /usr/local/etc/php/php.ini
