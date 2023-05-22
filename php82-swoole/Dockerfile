@@ -17,7 +17,7 @@ RUN apk update && \
         echo "https://dl-cdn.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories 
 
 RUN apk add --no-cache wkhtmltopdf ttf-freefont fontconfig && \ 
-    docker-php-ext-install bz2 calendar exif gettext mysqli pcntl shmop sockets sysvmsg sysvsem sysvshm zip pdo_mysql pdo_sqlite xsl bcmath && \
+    docker-php-ext-install bz2 calendar exif gettext mysqli pcntl shmop sockets sysvmsg sysvsem sysvshm zip pdo_mysql pdo_sqlite xsl bcmath soap && \
     docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd && \
     printf "\n" | pecl install apcu && printf "\n" | pecl install redis && \
     printf "\n" | pecl install swoole && \
@@ -35,8 +35,6 @@ RUN apk update && apk add ca-certificates ffmpeg libwebp libwebp-tools superviso
     sed -i 's/max_execution_time = 30/max_execution_time = 600/g' /usr/local/etc/php/php.ini
     
 RUN mkdir -p /var/log/supervisor /run/nginx
-
-RUN docker-php-ext-install soap
 
 COPY supervisord.conf /etc/supervisord.conf
 COPY default.conf /etc/nginx/http.d/default.conf
