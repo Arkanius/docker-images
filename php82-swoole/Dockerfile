@@ -13,6 +13,7 @@ RUN apk update && \
         sqlite-dev \
         linux-headers \
         libxslt-dev && \
+        openssl && \
         echo "https://dl-cdn.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories && \
         echo "https://dl-cdn.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories 
 

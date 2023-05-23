@@ -38,6 +38,7 @@ RUN apk --update add sudo && \
     oniguruma-dev \
     less \
     wget && \
+    openssl && \
     docker-php-ext-install zip bz2 mbstring pcntl xsl mysqli pdo pdo_mysql pdo_pgsql bcmath intl sockets exif soap && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd && \
